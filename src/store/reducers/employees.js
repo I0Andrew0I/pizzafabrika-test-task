@@ -3,7 +3,7 @@ import { getMaxId } from "../../helpers/helpers";
 const {
   ADD_EMPLOYEE,
   SET_EMPLOYEE,
-  LOAD_EMPLOYEE,
+  LOAD_EMPLOYEES,
 } = require("../actions/employees");
 
 const employees = (employeesState = [], { type, payload }) => {
@@ -15,7 +15,7 @@ const employees = (employeesState = [], { type, payload }) => {
       return employeesState.map((employee) =>
         employee.id === payload.id ? payload : employee
       );
-    case LOAD_EMPLOYEE:
+    case LOAD_EMPLOYEES:
       return payload;
     default:
       return employeesState;
