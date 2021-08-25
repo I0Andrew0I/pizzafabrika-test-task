@@ -1,27 +1,17 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { Route, Switch } from "react-router";
+import EmployeeForm from "./components/EmployeeForm/EmployeeForm";
+import EmployeesList from "./components/EmployeesList/EmployeesList";
 import "./App.scss";
-import defaultEmployees from "./data/defaultEmployees.json";
-import { loadEmployees } from "./store/actions/employees";
-
-const getEmployeesFromLocalStore = () =>
-  JSON.parse(localStorage.getItem("employees"));
-
-const saveEmployeesToLocalStore = (employees) =>
-  localStorage.setItem("employees", JSON.stringify(employees));
 
 const App = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const employees = getEmployeesFromLocalStore() || defaultEmployees;
-    dispatch(loadEmployees(employees));
-  }, [dispatch]);
-
   return (
-    <div className="app">
-      <header className="app-header">Pizza fabrika test task</header>
-      <main className="app-main">Main content</main>
-    </div>
+    <main className="app">
+      <Switch>
+        <Route path="/employee/add" component={EmployeeForm} />
+        <Route path="/employee/:employeeId" component={EmployeeForm} />
+        <Route path="*" component={EmployeesList} />
+      </Switch>
+    </main>
   );
 };
 
