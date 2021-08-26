@@ -5,7 +5,7 @@ import "./App.scss";
 
 const App = () => {
   return (
-    <main className="app">
+    <main data-testid="app" className="app">
       <Switch>
         <Route exact path="/employee/add" component={EmployeeForm} />
         <Route exact path="/employee/:employeeId" component={EmployeeForm} />

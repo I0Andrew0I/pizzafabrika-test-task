@@ -6,7 +6,7 @@ import { sortTypes } from "../../constants/constants";
 import { sortObjArrayByDate, sortObjArrayByText } from "../../helpers/helpers";
 import "./EmployeesList.scss";
 
-const EmployeeList = () => {
+const EmployeesList = () => {
   const employees = useSelector(({ employees }) => employees);
   const [nameSortType, setNameSortType] = useState(sortTypes.none);
   const [birthdaySortType, setBirthdaySortType] = useState(sortTypes.none);
@@ -29,7 +29,7 @@ const EmployeeList = () => {
   );
 
   return (
-    <div className="employees-list">
+    <div data-testid="employees-list" className="employees-list">
       <Filters
         sorted={{
           name: { sortType: nameSortType, setSortType: setNameSortType },
@@ -57,4 +57,4 @@ const EmployeeList = () => {
   );
 };
 
-export default EmployeeList;
+export default EmployeesList;
