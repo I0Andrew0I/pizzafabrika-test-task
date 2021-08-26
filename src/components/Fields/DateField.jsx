@@ -4,6 +4,7 @@ import { KeyboardDatePicker } from "@material-ui/pickers";
 const DateField = ({ value, onChange, label, isError }) => {
   return (
     <KeyboardDatePicker
+      autoOk
       disableToolbar
       format="dd.MM.yyyy"
       label={label}
@@ -17,6 +18,9 @@ const DateField = ({ value, onChange, label, isError }) => {
       fullWidth
       helperText={isError ? "Неверный формат" : " "}
       error={isError}
+      cancelLabel={""}
+      clearLabel={""}
+      okLabel={""}
     />
   );
 };
