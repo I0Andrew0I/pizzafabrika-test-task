@@ -38,7 +38,7 @@ const Filters = ({ sorted, filtered }) => {
                 <CheckboxField
                   value={isArchive.filter}
                   onChange={handleBoolChange(isArchive.setFilter)}
-                  label={"Только в архиве"}
+                  label={"В архиве"}
                 />
               </div>
             </Grid>
