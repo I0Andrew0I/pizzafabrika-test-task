@@ -6,6 +6,11 @@ import PhoneField from "./Fields/PhoneField";
 import DateField from "./Fields/DateField";
 import CheckboxField from "./Fields/CheckboxField";
 import { roles } from "../../constants/constants";
+import {
+  handleBoolChange,
+  handleDateChange,
+  handleTextChange,
+} from "../../helpers/helpers";
 import "./EmployeeForm.scss";
 
 const EmployeeFormLayout = ({
@@ -41,7 +46,7 @@ const EmployeeFormLayout = ({
               fullWidth
               label={name.label}
               value={name.value}
-              onChange={name.onChange}
+              onChange={handleTextChange(name.setValue)}
               helperText={
                 isError && !name.isValid ? "Должно содержать только буквы" : " "
               }
@@ -52,7 +57,7 @@ const EmployeeFormLayout = ({
             <SelectField
               selectList={roles}
               value={role.value}
-              onChange={role.onChange}
+              onChange={handleTextChange(role.setValue)}
               label={role.label}
               isError={isError && !role.isValid}
             />
@@ -60,7 +65,7 @@ const EmployeeFormLayout = ({
           <Grid className="grid-item" item xs={12} sm={6}>
             <PhoneField
               value={phone.value}
-              onChange={phone.onChange}
+              onChange={handleTextChange(phone.setValue)}
               label={phone.label}
               isError={isError && !phone.isValid}
             />
@@ -68,7 +73,7 @@ const EmployeeFormLayout = ({
           <Grid className="grid-item" item xs={12} sm={6} zeroMinWidth>
             <DateField
               value={birthday.value}
-              onChange={birthday.onChange}
+              onChange={handleDateChange(birthday.setValue)}
               label={birthday.label}
               isError={isError && !birthday.isValid}
             />
@@ -76,7 +81,7 @@ const EmployeeFormLayout = ({
           <Grid className="grid-item" item xs={12} zeroMinWidth>
             <CheckboxField
               value={isArchive.value}
-              onChange={isArchive.onChange}
+              onChange={handleBoolChange(isArchive.setValue)}
               label={isArchive.label}
             />
           </Grid>
@@ -105,7 +110,7 @@ const EmployeeFormLayout = ({
       </div>
       <Snackbar
         open={isOpenAlert}
-        autoHideDuration={2000}
+        autoHideDuration={2500}
         onClose={handleCancel}
         anchorOrigin={{
           vertical: "top",
@@ -125,7 +130,7 @@ EmployeeFormLayout.propTypes = {
         PropTypes.bool,
         PropTypes.instanceOf(Date),
       ]).isRequired,
-      onChange: PropTypes.func.isRequired,
+      setValue: PropTypes.func.isRequired,
       label: PropTypes.string.isRequired,
       isValid: PropTypes.bool,
     })

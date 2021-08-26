@@ -43,12 +43,6 @@ const EmployeeForm = () => {
       isEqual(birthday, transformStrToDate(currEmployee?.birthday))
     );
 
-  const handleNameChange = ({ target }) => setName(target.value);
-  const handleIsArchiveChange = ({ target }) => setIsArchive(target.checked);
-  const handleRoleChange = ({ target }) => setRole(target.value);
-  const handlePhoneChange = ({ target }) => setPhone(target.value);
-  const handleBirthdayChange = (date) => setBirthday(date);
-
   const isValidDate = isValid(birthday);
   const isValidPhone = validatePhone(phone);
   const isValidName = name?.length > 0 && /^[a-zA-Zа-яА-Я -]+$/gm.test(name);
@@ -88,31 +82,31 @@ const EmployeeForm = () => {
       fields={{
         name: {
           value: name,
-          onChange: handleNameChange,
+          setValue: setName,
           label: "Имя и фамилия",
           isValid: isValidName,
         },
         isArchive: {
           value: isArchive,
-          onChange: handleIsArchiveChange,
+          setValue: setIsArchive,
           label: "В архиве",
           isValid: isValidName,
         },
         role: {
           value: role,
-          onChange: handleRoleChange,
+          setValue: setRole,
           label: "Должность",
           isValid: isValidRole,
         },
         phone: {
           value: phone,
-          onChange: handlePhoneChange,
+          setValue: setPhone,
           label: "Телефон",
           isValid: isValidPhone,
         },
         birthday: {
           value: birthday,
-          onChange: handleBirthdayChange,
+          setValue: setBirthday,
           label: "Дата рождения",
           isValid: isValidDate,
         },

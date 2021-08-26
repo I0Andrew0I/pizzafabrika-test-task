@@ -22,3 +22,15 @@ exports.isValidDate = (day, month, year) => {
 
 exports.getTotalIsValid = (...isValids) =>
   isValids.reduce((totalIsValid, isValid) => totalIsValid && isValid, true);
+
+exports.handleTextChange =
+  (setFunc) =>
+  ({ target }) =>
+    setFunc(target.value);
+
+exports.handleBoolChange =
+  (setFunc) =>
+  ({ target }) =>
+    setFunc(target.checked);
+
+exports.handleDateChange = (setFunc) => (date) => setFunc(date);
