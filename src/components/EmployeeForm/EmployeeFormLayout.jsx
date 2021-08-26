@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import { Button, Grid, Snackbar, TextField } from "@material-ui/core";
 import { useHistory } from "react-router";
-import SelectField from "./Fields/SelectField";
-import PhoneField from "./Fields/PhoneField";
-import DateField from "./Fields/DateField";
-import CheckboxField from "./Fields/CheckboxField";
-import { roles } from "../../constants/constants";
+import SelectField from "../Fields/SelectField";
+import PhoneField from "../Fields/PhoneField";
+import DateField from "../Fields/DateField";
+import CheckboxField from "../Fields/CheckboxField";
+import { redirectDelay, roles } from "../../constants/constants";
 import {
   handleBoolChange,
   handleDateChange,
@@ -22,7 +22,6 @@ const EmployeeFormLayout = ({
   isOpenAlert,
 }) => {
   const history = useHistory();
-
   const handleCancel = () => history.push("/");
 
   const { name, phone, isArchive, role, birthday } = fields;
@@ -110,7 +109,7 @@ const EmployeeFormLayout = ({
       </div>
       <Snackbar
         open={isOpenAlert}
-        autoHideDuration={2500}
+        autoHideDuration={redirectDelay}
         onClose={handleCancel}
         anchorOrigin={{
           vertical: "top",

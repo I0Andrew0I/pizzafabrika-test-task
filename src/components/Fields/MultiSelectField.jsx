@@ -7,11 +7,17 @@ const {
   FormHelperText,
 } = require("@material-ui/core");
 
-const SelectField = ({ selectList, value, onChange, isError, label }) => {
+const MultiSelectField = ({ selectList, value, onChange, isError, label }) => {
   return (
     <FormControl fullWidth>
       <InputLabel>{label}</InputLabel>
-      <Select value={value} onChange={onChange} fullWidth error={isError}>
+      <Select
+        multiple
+        value={value}
+        onChange={onChange}
+        fullWidth
+        error={isError}
+      >
         {Object.keys(selectList).map((key) => (
           <MenuItem key={key} value={key}>
             {selectList[key]}
@@ -25,12 +31,16 @@ const SelectField = ({ selectList, value, onChange, isError, label }) => {
   );
 };
 
-SelectField.propTypes = {
+MultiSelectField.propTypes = {
   selectList: PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChange: PropTypes.func.isRequired,
-  isError: PropTypes.bool.isRequired,
+  isError: PropTypes.bool,
   label: PropTypes.string.isRequired,
 };
 
-export default SelectField;
+MultiSelectField.defaultValue = {
+  isError: false,
+};
+
+export default MultiSelectField;

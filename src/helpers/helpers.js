@@ -1,13 +1,15 @@
-const { parse, isValid } = require("date-fns");
+const { parse, isValid, compareDesc } = require("date-fns");
 const { format } = require("date-fns/esm");
+const { sortTypes } = require("../constants/constants");
 
 exports.getMaxId = (array) =>
   array.reduce((maxId, { id }) => (maxId > id ? maxId : id), 0);
 
-exports.transformStrToDate = (str) => {
+const transformStrToDate = (str) => {
   const [day, month, year] = str.split(".");
   return new Date(year, month - 1, day);
 };
+exports.transformStrToDate = transformStrToDate;
 
 exports.transformDateToStr = (date) => {
   return format(date, "dd.MM.yyyy");
@@ -34,3 +36,26 @@ exports.handleBoolChange =
     setFunc(target.checked);
 
 exports.handleDateChange = (setFunc) => (date) => setFunc(date);
+
+exports.handleMultiSelectChange =
+  (setFunc) =>
+  ({ target }) =>
+    setFunc(target.value);
+
+const strCompare = (a, b) => (a < b ? -1 : a > b ? 1 : 0);
+
+exports.sortObjArrayByText = (array, field, sortType) => {
+  if (sortType === sortTypes.none) return array;
+  const lessFactor = sortType === sortTypes.less ? 1 : -1;
+  return [...array].sort((a, b) => strCompare(a[field], b[field]) * lessFactor);
+};
+
+exports.sortObjArrayByDate = (array, field, sortType) => {
+  if (sortType === sortTypes.none) return array;
+  const lessFactor = sortType === sortTypes.less ? -1 : 1;
+  return [...array].sort(
+    (a, b) =>
+      compareDesc(transformStrToDate(a[field]), transformStrToDate(b[field])) *
+      lessFactor
+  );
+};

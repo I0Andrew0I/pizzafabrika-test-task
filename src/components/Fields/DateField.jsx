@@ -21,11 +21,15 @@ const DateField = ({ value, onChange, label, isError }) => {
   );
 };
 
-PropTypes.propTypes = {
-  value: PropTypes.string.isRequired,
+DateField.propTypes = {
+  value: PropTypes.objectOf(Date).isRequired,
   onChange: PropTypes.func.isRequired,
-  isError: PropTypes.bool.isRequired,
+  isError: PropTypes.bool,
   label: PropTypes.string.isRequired,
+};
+
+DateField.defaultValue = {
+  isError: false,
 };
 
 export default DateField;
